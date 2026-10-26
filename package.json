@@ -1,0 +1,13 @@
+{
+  "name": "agent-skills",
+  "version": "0.1.0",
+  "description": "Personal agent skills and config for Claude Code / Codex, applied with one npx command",
+  "type": "module",
+  "bin": {
+    "agent-config": "./apply/apply.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

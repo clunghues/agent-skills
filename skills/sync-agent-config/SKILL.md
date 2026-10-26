@@ -9,17 +9,16 @@ The source of truth is the git repo `clunghues/agent-skills`. Other repos with t
 
 ## Apply on this machine
 
-1. Locate the checkout of `clunghues/agent-skills` on this machine (ask the user if unknown). If absent, clone it with `gh repo clone clunghues/agent-skills`.
-2. Make sure `~/.agents/agent-config/machine.json` exists. If not, copy `machine.local.example.json` there and fill in the hook binary paths for this machine. Hooks whose `requires` file is missing are skipped, never written.
-3. Preview, then apply:
+1. Make sure `~/.agents/agent-config/machine.json` exists. If not, download `machine.local.example.json` from the repo to that path. Hooks whose `requires` file is missing are skipped, never written.
+2. Preview, then apply. No checkout is needed:
 
 ```bash
-node apply/apply.mjs --dry-run
-node apply/apply.mjs
+npx -y github:clunghues/agent-skills --dry-run
+npx -y github:clunghues/agent-skills
 ```
 
-   On Windows `.\apply.ps1`, on macOS/Linux `./apply.sh` wrap the same script.
-4. If Codex hooks changed, tell the user to run `/hooks` inside Codex on this machine to trust them. Trust state is per machine and is never synced.
+   From a local checkout the same thing is `node apply/apply.mjs` (or `apply.ps1` / `apply.sh`).
+3. If Codex hooks changed, tell the user to run `/hooks` inside Codex on this machine to trust them. Trust state is per machine and is never synced.
 
 ## Update skills only
 

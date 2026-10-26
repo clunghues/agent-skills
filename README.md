@@ -16,8 +16,9 @@ claude/CLAUDE.md                managed block appended to ~/.claude/CLAUDE.md
 claude/plugins.json             marketplaces + plugin ids installed with the `claude plugin` CLI
 codex/hooks.fragment.json       hook groups you wrote yourself, merged into ~/.codex/hooks.json (empty by default)
 codex/AGENTS.md                 managed block appended to ~/.codex/AGENTS.md
-apply/apply.mjs                 the only implementation (Node >= 22); apply.ps1 / apply.sh just call it
+apply/apply.mjs                 the only implementation (Node >= 22); `npx github:clunghues/agent-skills`, apply.ps1 and apply.sh all run it
 agent-config.json               owner, source, target agents, pinned skills CLI version
+package.json                    exposes apply.mjs as the `agent-config` bin for npx
 machine.local.example.json      template for ~/.agents/agent-config/machine.json (per-machine, never committed)
 ```
 
@@ -26,14 +27,14 @@ Per-machine files live outside the repo in `~/.agents/agent-config/`:
 
 ## New machine
 
-Requirements: git, Node 22+, `gh auth login` for private sources.
+Requirements: git, Node 22+, Claude Code logged in once (for the plugin step), `gh auth login` for private sources.
+No checkout is needed; npx fetches this repo and runs `apply.mjs` from it.
 
 ```bash
-gh repo clone clunghues/agent-skills <checkout-dir>
-cd <checkout-dir>
-cp machine.local.example.json ~/.agents/agent-config/machine.json          # then edit the paths
-./apply.sh --dry-run        # Windows: .\apply.ps1 --dry-run
-./apply.sh
+mkdir -p ~/.agents/agent-config
+curl -fsSL https://raw.githubusercontent.com/clunghues/agent-skills/main/machine.local.example.json   -o ~/.agents/agent-config/machine.json      # edit only if you add hooks with ${var} placeholders
+npx -y github:clunghues/agent-skills --dry-run
+npx -y github:clunghues/agent-skills
 ```
 
 If you add Codex hooks to the fragment, run `/hooks` once inside Codex to trust them on each machine.
@@ -47,18 +48,18 @@ npx -y skills@1.7.4 add clunghues/agent-skills -g -a claude-code codex -s '*' -y
 ## Daily use
 
 ```bash
-# edit in the checkout, then publish
-git add -A && git commit -m "<skill>: ..." && git push
-
 # other machines: refresh installed skills (changed content only)
 npx -y skills@1.7.4 update -g
 
-# other machines: pick up new profile entries, hook or block changes
-git pull && ./apply.sh
+# other machines: pick up new profile entries, plugin, hook or block changes
+npx -y github:clunghues/agent-skills
 
-# add a skill
+# editing: clone once, change, publish
+gh repo clone clunghues/agent-skills && cd agent-skills
 mkdir -p skills/my-skill && $EDITOR skills/my-skill/SKILL.md
 echo my-skill >> profiles/all.txt   # and core.txt if it should be installed everywhere
+./apply.sh --dry-run                # apply from the checkout while iterating
+git add -A && git commit -m "my-skill: ..." && git push
 ```
 
 ## How apply works
