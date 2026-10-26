@@ -32,7 +32,7 @@ No checkout is needed; npx fetches this repo and runs `apply.mjs` from it.
 
 ```bash
 mkdir -p ~/.agents/agent-config
-curl -fsSL https://raw.githubusercontent.com/clunghues/agent-skills/main/machine.local.example.json   -o ~/.agents/agent-config/machine.json      # edit only if you add hooks with ${var} placeholders
+curl -fsSL https://raw.githubusercontent.com/clunghues/agent-skills/main/machine.local.example.json -o ~/.agents/agent-config/machine.json
 npx -y github:clunghues/agent-skills --dry-run
 npx -y github:clunghues/agent-skills
 ```
