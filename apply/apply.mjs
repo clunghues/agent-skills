@@ -243,9 +243,9 @@ function run(cmd, args) {
   const shown = `${cmd} ${args.join(' ')}`;
   if (opt.dryRun) { log(`would run: ${shown}`); return; }
   log(`run: ${shown}`);
-  // Windows: .cmd shims need a shell, so pass one quoted command line (args are plain tokens).
+  // Windows: go through cmd.exe so PATHEXT resolves npx.cmd / claude.exe; args are plain tokens, quoted anyway.
   const r = IS_WIN
-    ? spawnSync([`${cmd}.cmd`, ...args].map(q).join(' '), { stdio: 'inherit', shell: true })
+    ? spawnSync([cmd, ...args].map(q).join(' '), { stdio: 'inherit', shell: true })
     : spawnSync(cmd, args, { stdio: 'inherit' });
   if (r.error || r.status !== 0) warn(`command failed (${r.status ?? r.error?.message}): ${shown}`);
 }
