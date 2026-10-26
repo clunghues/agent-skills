@@ -1,0 +1,2 @@
+# Every skill in this repo
+sync-agent-config

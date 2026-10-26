@@ -1,0 +1,3 @@
+# External skill repos installed alongside this one.
+# Format: <owner/repo> <skill> [<skill> ...]   (# = comment)
+vercel-labs/skills find-skills

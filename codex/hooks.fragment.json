@@ -1,0 +1,4 @@
+{
+  "$comment": "Managed hook groups merged into ~/.codex/hooks.json by apply.mjs. Intentionally empty: app-installed hooks are not synced. Add only hooks you wrote yourself; trust them per machine with /hooks inside Codex.",
+  "hooks": {}
+}

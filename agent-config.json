@@ -1,0 +1,16 @@
+{
+  "owner": "personal",
+  "source": "clunghues/agent-skills",
+  "agents": ["claude-code", "codex"],
+  "defaultProfile": "core",
+  "skillsCli": "skills@1.7.4",
+  "claude": {
+    "fragment": "claude/settings.fragment.json",
+    "managedMd": "claude/CLAUDE.md",
+    "plugins": "claude/plugins.json"
+  },
+  "codex": {
+    "hooks": "codex/hooks.fragment.json",
+    "managedMd": "codex/AGENTS.md"
+  }
+}

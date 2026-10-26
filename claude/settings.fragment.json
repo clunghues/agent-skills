@@ -1,0 +1,4 @@
+{
+  "$comment": "Managed keys merged into ~/.claude/settings.json by apply.mjs. Intentionally empty: hooks installed by apps (terminal/IDE integrations) are not synced. Add only hooks you wrote yourself; ${var} values come from ~/.agents/agent-config/machine.json.",
+  "hooks": {}
+}

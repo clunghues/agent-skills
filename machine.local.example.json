@@ -1,0 +1,12 @@
+{
+  "$comment": "Copy to ~/.agents/agent-config/machine.json and edit per machine. `vars` are substituted into ${var} placeholders of the hook fragments; a var may be a string or {value, requires}. If `requires` does not exist on this machine, hooks using that var are skipped.",
+  "vars": {
+    "example_hook": {
+      "value": "node /absolute/path/to/hook.mjs",
+      "requires": "/absolute/path/to/hook.mjs"
+    }
+  },
+  "profiles": {
+    "personal": "core"
+  }
+}

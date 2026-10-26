@@ -1,0 +1,2 @@
+# Skills from this repo installed by default (one name per line, # = comment)
+sync-agent-config
